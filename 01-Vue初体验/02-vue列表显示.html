@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--指令v-for,vue管理div后会解析其中的指令-->
+    <ul>
+        <!--vue将变量movies中的数据依次取出放到变量item中-->
+        <li v-for="item in movies">{{item}}</li>
+    </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            message:'你好啊',
+            movies:['星际穿越','大话西游','少年派','盗梦空间']
+        }
+    })
+</script>
+</body>
+</html>

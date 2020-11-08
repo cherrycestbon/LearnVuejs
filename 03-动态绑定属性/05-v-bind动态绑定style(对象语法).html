@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--<h2 :style="{key(属性名):value(属性值)}">{{message}}</h2>-->
+  <!--因为vue在解析50px时,会把它当作变量去data中寻找这个变量。为避免这种情况，50px需要加单引号，这和css有区别-->
+  <!--如果用驼峰，key是不需要加单引号的-->
+  <h2 :style="{fontSize:'50px'}">{{message}}</h2>
+  <!--如果用短横线分隔，key需要加单引号-->
+  <h2 :style="{'font-size':'50px',color:finalColor}">{{message}}</h2>
+  <h2 :style="getStyles()">{{message}}</h2>
+  <!--finalSize没有单引号，vue解析为变量去使用-->
+  <h2 :style="{'font-size':finalSize}">{{message}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      finalSize:'100px',
+      finalColor:'purple'
+    },
+    methods:{
+      getStyles:function (){
+        return {'font-size':this.finalSize,color:this.finalColor}
+      }
+    }
+  })
+</script>
+</body>
+</html>

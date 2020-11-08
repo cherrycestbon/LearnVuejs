@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--这里属性不能使用Mustache语法，只能在元素的内容区域使用-->
+  <!--<img src="{{imgURL}}">-->
+  <!--正确做法：给哪个属性绑定值，就在哪个属性前加v-bind:,然后vue解析时，就会把该属性的值当作一个变量去vue的data属性中去找-->
+  <img v-bind:src="imgURL">
+  <a v-bind:href="aHref">百度一下</a>
+
+  <!--语法糖写法-->
+  <img :src="imgURL">
+  <a :href="aHref">百度一下</a>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      imgURL:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602392032559&di=6d8359c1439db22cac49d010a5b46ac1&imgtype=0&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1378709797%2C3014872189%26fm%3D214%26gp%3D0.jpg',
+      aHref:'http://www.baidu.com'
+    }
+  })
+</script>
+</body>
+</html>

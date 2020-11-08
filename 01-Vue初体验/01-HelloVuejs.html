@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--使用双大写括号显示数据-->
+<div id="app">
+    <h2>{{message}}</h2>
+    <h1>{{name}}</h1>
+</div>
+<div>{{message}}</div>
+<script src="../js/vue.js"></script>
+<script>
+    //创建vue实例,传入一个对象，对象有一个属性，可以让vue管理一个div,相当于将div传给了vue,vue实例就会负责管理div
+    //当div被vue管理之后，vue就会解析div中的语法，会发现有一个变量message，然后就会在data中看此变量是否被定义，
+    const app = new Vue({
+        el:'#app',//用于挂载要管理的元素，vue对象挂载到div元素上
+        data:{//定义一些数据,这样数据和页面完全分离。只写一些HTML，嵌套一些变量就能显示。
+            message:'你好啊，李银河',//当这里数据改变了，div中的值也会改变，就是vue的响应式。
+            name:'coderwhy'
+        }
+    })
+
+    //以前使用jQuery的话，是使用的一种编程范式：命令式编程，现在vue是声明式编程。这种范式更流行，更好用。
+</script>
+</body>
+</html>

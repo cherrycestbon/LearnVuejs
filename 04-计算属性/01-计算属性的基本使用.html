@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <h2>{{firstName + ' ' + lastName}}</h2>
+  <h2>{{firstName}} {{lastName}}</h2>
+  <!--一般情况下{{}}中间显示一个变量名，这里显示一个方法，比较别扭-->
+  <h2>{{getFullName()}}</h2>
+  <!--我们在使用中也是把计算属性中的方法当作属性去使用的，所以使用时不用带();-->
+  <h2>{{fullName}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      firstName:'Lebron',
+      lastName:'James'
+    },
+    computed:{
+      fullName:function(){
+        return this.firstName +' '+ this.lastName;
+      }
+    },
+    methods:{
+      getFullName:function(){
+        return this.firstName +' '+ this.lastName;
+      }
+    }
+  })
+</script>
+</body>
+</html>
