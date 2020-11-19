@@ -13,7 +13,7 @@
 <div>{{message}}</div>
 <script src="../js/vue.js"></script>
 <script>
-    //创建vue实例,传入一个对象，对象有一个属性，可以让vue管理一个div,相当于将div传给了vue,vue实例就会负责管理div
+    //创建vue实例,传入一个对象，对象有一个属性el，可以让vue管理一个div,相当于将div传给了vue,vue实例就会负责管理div
     //当div被vue管理之后，vue就会解析div中的语法，会发现有一个变量message，然后就会在data中看此变量是否被定义，
     const app = new Vue({
         el:'#app',//用于挂载要管理的元素，vue对象挂载到div元素上
