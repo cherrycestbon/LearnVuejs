@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+<script>
+  //在ES5之前，因为if、for都没有块级作用域的概念，所以在很多时候，我们都必须借助于function的作用域来解决引用块的外面变量的问题;
+
+  //1.变量作用域：变量在什么范围内可用
+  {
+    //在{}内部定义变量
+    var name = 'why';
+    console.log(name)
+  }
+  //在{}外部也能使用
+  console.log(name);
+
+  //2.没有块级作用域引起的问题:if的块级
+  var func;
+  if(true){
+    var name2 = 'because';
+    func = function(){
+      console.log(name2)
+    }
+  }
+  name2 = 'kobe';
+  //这里调用func,本来想打印if(){}块中的name2,应该是because,但是被作用域外面的代码改变了，打印出kobe
+  func()
+
+  //3.for的块级
+  var btns = document.getElementsByTagName('button');
+  for (var i = 0;i<btns.length;i++){
+    btns[i].addEventListener('click',function(){
+      console.log('第' + i + '个按钮被点击');
+    })
+  }
+  //点击第一按钮时，打印的是：第5个按钮被点击。因为在使用第一次被传递进click的function中的i时，本来i应该时0，但由于for循环，i已经被改变了。
+  //说明click的function的块级不起作用。
+  //例2和3的本质都是，在使用变量时，变量已经被改变了。只不过例2时手动改掉的，例3是系统循环自动改掉的。
+  //所以if和for都没有块级。
+  //以前为了解决这个问题，需要使用闭包
+  for (var i = 0;i<btns.length;i++){
+    (function(i){//这里定义：functioin(i){}其实就相当于定义一个普通的函数，这个i也可以是a,b,c或其他任意字符，如function(a){}或function(b){},这个字符和闭包外的for循环中的i没有关系，它是和这个函数被立即调用时传入的值有关系的，一旦被调用，传入一个值，这个变量就确定了。函数内部有作用域，只使用自己内部的变量，外界再改变对函数内部没有影响。
+      //这里有5个函数，每个btn都有一个自己的function(){...}，每次闭包立即执行，都将i传入闭包中，闭包中的i都已经确定，不会再随闭包外面的i的变化而变化了。
+      btns[i].addEventListener('click',function(){
+        console.log('第' + i + '个按钮被点击');
+      })
+    })(i)//在定义闭包时，将结尾的(i)传给闭包中function(i){}中的i,闭包外面的i再怎么改变，对闭包里面的i已经没有影响了。
+  }
+  //为什么闭包可以解决问题：函数是有作用域的，在作用域内永远使用自己的变量。
+  //相当于定义了一个函数：
+  var name3 = 'so';
+  function abc(name3){//这里已经确定 name == 'so'
+    console.log(name3)
+  }
+  abc(name3);//在这里调用abc时，已经确定传入的是‘so’;这里就相当于定义闭包时，立即执行，出入了so;后面再改变name3,已经对这里没有影响了。
+  name3 = 'but'//无论后面再怎么name3,abc中的入参已经确定时so,已经和name3没什么关系了。
+  //打印结果是so
+
+  //在JavaScript领域中，只有函数有作用域，其他的都没有作用域，比如if,for
+
+  //在ES6中，加入了let，let它是有if和for的块级作用域的。
+  const btns2 = doucument.getElementsByTagName('button');
+  for (let i = 0;i<btns2.length;i++) {
+    btns2[i].addEventListener('click',function(){//这个function(){}有自己的作用域，每次在{}内调用i,i只属于这个{}，这个函数被调用5次，则每次都有自己的i。
+      //因为i被let修饰，所以在函数{}内，每个函数都使用自己的i，即使for中的i被改变了，但是不会改变这里函数{}内的i;也不会改变其他函数{}内的i;
+      console.log('第' + i + '个按钮被点击');
+    })
+  }
+  //伪代码，相当于for循环中每一次循环时的情况：如下，
+  //在ES6中，被let修饰的变量有了作用域的概念
+  { i = 0//因为let有作用域，每个{}内部有自己的i,//第一次进入for的{}内，这是一个作用域，相当于闭包的立即执行，i在这个{}范围内已经确定是0，但循环到1时，就是另一个{}、是另一个作用域了。和这个作用域1没关系了
+    btns2[i].addEventListener('click',function(){
+      console.log('第' + i + '个按钮被点击');
+    })
+  }
+  {i = 1//这里的i虽然从0变成了1，但是它只属于这个{}作用域，对上面第一个{}作用域中的i没有影响；但是如果是在ES5中，这里i变成1，由于var修饰的变量没有作用域的概念，上面第一个函数回调时使用的是当前这个已经被改变成1的i.
+    btns2[i].addEventListener('click',function(){
+      console.log('第' + i + '个按钮被点击');
+    })
+  }
+  {i = 2
+    btns2[i].addEventListener('click',function(){
+      console.log('第' + i + '个按钮被点击');
+    })
+  }
+  {i = 3
+    btns2[i].addEventListener('click',function(){
+      console.log('第' + i + '个按钮被点击');
+    })
+  }{i = 4
+    btns2[i].addEventListener('click',function(){
+      console.log('第' + i + '个按钮被点击');
+    })
+  }
+
+</script>
+</body>
+</html>
