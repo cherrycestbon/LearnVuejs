@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  //大括号{}叫作对象的字面量
+  const obj = {}
+  
+  const obj2 = {
+    name:'why',
+    age:18,
+    run:function () {
+      console.log('在奔跑');
+    },
+    eat:function () {
+      console.log('在吃东西');
+    }
+  }
+
+  //1.属性的增强写法
+  const name = 'why';
+  const age = 18;
+  const height = 1.88;
+  //es5写法
+  const obj3 = {
+    name:name,
+    age:age,
+    height:height
+  }
+  //es6写法
+  cosnt obj4 = {
+    name,
+    age,
+    height
+  }
+  //所以，以后如果已经有一些常量，想把他们放到对象中，就可以像上面那样写；
+
+  //2.函数的增强写法
+  //es5写法
+  const obj5 = {
+    run:function () {
+      
+    },
+    eat:function () {
+      
+    }
+  }
+  //es6写法
+  const obj6 = {
+    run(){
+
+    },
+    eat(){
+
+    }
+  }
+  //在对象的字面量中可以像上面这样直接定义函数
+</script>
+</body>
+</html>
