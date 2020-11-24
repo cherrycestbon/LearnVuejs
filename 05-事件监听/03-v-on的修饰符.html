@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--1.stop修饰符的使用-->
+  <!--点击按钮1，事件冒泡，先出发btnClick,再触发divClick-->
+  <div @click="divClick">
+    <button @click="btnClick1">按钮1</button>
+    <!--如果点击按钮2时，只执行btn的事件，把btn的冒泡阻止掉，可以再click后面加上.stop-->
+    <button @click.stop="btnClick2">按钮2</button>
+  </div>
+
+  <br>
+  <hr/>
+  <br>
+
+  <!--2.prevent修饰符的使用-->
+  <!--阻止submit的默认事件-->
+  <form action="baidu">
+    <input type="submit" value="提交" @click.prevent="submitClick">
+  </form>
+
+  <br>
+  <hr/>
+  <br>
+
+  <!--3.监听某个键的点击-->
+  <!--监听所有键的点击-->
+  <input type="text" @keyup="keyUp">
+  <input type="text" @keyup.enter="keyUp">
+
+  <br>
+  <hr/>
+  <br>
+
+  <!--4.once修饰符的使用-->
+  <!--某些情况，只允许触发一次事件，再点就不触发了-->
+  <input type="button" @click.once="btnClick3" value="按钮">
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    },
+    methods:{
+      btnClick1(){
+        console.log('btnClick1');
+      },
+      btnClick2(){
+        console.log('btnClick2');
+      },
+      divClick(){
+        console.log('divClick');
+      },
+      submitClick(){
+        console.log('submitClick');
+      },
+      keyUp(){
+        console.log('keyUp')
+      },
+      btnClick3(){
+        console.log('btnClick3');
+      }
+    }
+  })
+</script>
+</body>
+</html>
