@@ -13,7 +13,7 @@
   <!--2.在事件定义时，写函数时省略了小括号，但是方法本身是需要一个参数的，这个时候，vue会默认将浏览器生成的event事件对象作为参数传入到方法-->
   <button @click="btn2Click(123)">按钮2</button>
   <button @click="btn2Click()">按钮2</button><!--打印结果时undefined-->
-  <button @click="btn2Click">按钮2</button><!--这时打印的mouseEvent,传过来的时event-->
+  <button @click="btn2Click">按钮2</button><!--这时打印的mouseEvent,传过来的是event-->
 
   <!--3方法定义时，我们需要event对象，同时又需要其他参数，-->
   <button @click="btn3Click">按钮3</button><!--默认会把第一个参数变成event对象，其他参数变成undefined-->
