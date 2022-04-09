@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--通过v-if中的boolean来控制“文本文字内容或html“是否显示-->
+  <h2 v-if="true">
+    <div>aaa</div>
+    <div>aaa</div>
+    <div>aaa</div>
+    <div>aaa</div>
+    {{message}}
+  </h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    }
+  })
+</script>
+</body>
+</html>
