@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--在debuge的console中设置app.isShow=false,两个标签都不显示了，但是它们消失的方式不同-->
+  <!--v-if控制的元素在dom中将不存在，v-show控制的元素，添加了行内样式style="display:none;"-->
+ <h2 v-if="isShow">{{message}}</h2>
+ <h2 v-show="isShow">{{message}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      isShow: true
+    }
+  })
+</script>
+</body>
+</html>

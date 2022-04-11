@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--可以做的响应式：push-->
+  <ul>
+    <li v-for="item in letters">{{item}}</li>
+  </ul>
+  <button @click="btnClick">按钮</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      letters: ['A','B','C','D','E']
+    },
+    methods: {
+      btnClick(){
+        //1.push方法,可以做到响应式
+        //this.letters.push('FFF');
+        //pop,shift,unshift,sort,reverse，也可以做到响应式
+
+        //注意：
+        //2.通过索引值修改数组中的元素,不可以做到响应式。
+        //这个方法可以改变数组中的元素，但是无法响应到页面上的dom中。所以一般不要用这中方法。
+        //因为vue内部没有监听通过这种方式改变数组。可以用splice替换：this.letters.splice(0,1,'G')。推荐这种方式修改数组。
+        this.letters[0] = 'G';
+        //vue的set方法可以传入三个参数：
+        //1.要修改的对象。2.索引值(要修改数组中哪一个元素)。3修改后的值。
+        //这种方式可以响应式。
+        Vue.set(this.letters,0,)
+      }
+    }
+  })
+</script>
+</body>
+</html>

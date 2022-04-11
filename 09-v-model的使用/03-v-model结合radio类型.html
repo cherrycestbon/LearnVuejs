@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--为了使用lable中的for,给input定义id。为了让两个radio互斥，给两个radio定义相同的name-->
+  <!--注意：一旦使用了v-model绑定了同一个变量，input中没有name属性，也可以是radio互斥-->
+  <label for="male">
+    <input type="radio" id="male" name="sex" value="男" v-model="sex">男
+  </label>
+  <label for="female">
+    <input type="radio" id="female" name="sex" value="女" v-model="sex">女
+  </label>
+  <h2>您选择的性别是：{{sex}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      sex: ''/*注意：如果在这里设置初始值为男，由于双向绑定，radio中男会在页面第一次加载是被选中*/
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--1.lazy-->
+  <!--没有加.layz时,input中的值与data中值实时绑定。加了lazy,只有input失去焦点，input中的值才同步到data中-->
+  <input type="text" v-model.lazy="message">
+  <h2>{{message}}</h2>
+  <hr>
+  <!--2.number-->
+  <!--v-model会默认把input中的值当作字符串类型赋值到data中-->
+  <!--加上.number之后，默认把input中值作为数字类型赋值到data中，省得再类型转换-->
+  <input type="number" v-model.number="age">
+  <h2>{{age}} {{typeof age}}</h2>
+  <hr>
+  <!--2,trim-->
+  <!--trim可以自动去除input中值两边的空格-->
+  <input type="text" v-model.trim="name">
+  <h2>{{name}}</h2><!--这里看不出有空格，需要再debug的console中输入app.name来查看-->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      age: '',
+      name: ''
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--v-model指令相当于两个指令的结合-->
+  <!--<input type="text" v-model="message">-->
+
+  <!--data中的数据通过属性绑定，绑定到input的value-->
+  <!--input输入框有一个input事件，当value发生改变时触发-->
+  <!--一旦在界面上产生一个事件，浏览器会生成一个event对象，event中包含一些信息-->
+  <!--如果事件绑定的表达式中省略参数，而methods方法中有参数，会自动把event对象传到方法中-->
+  <input type="text" :value="message" @input="valueChange">
+
+  <!--也可以直接在事件表达式中给message赋值：message = $event.target.value-->
+  <input type="text" :value="message" @input="message = $event.target.value">
+
+  <h2>{{message}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    },
+    methods: {
+      valueChange(event){
+        this.message = event.target.value;
+      }
+    }
+  })
+</script>
+</body>
+</html>

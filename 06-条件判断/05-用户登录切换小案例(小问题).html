@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--04中问题描述，在用户名称模式下，输入123，点击切换类型导用户邮箱模式下，但是文本框中123没有清除-->
+  <!--使用key属性解决这个问题:key可以避免vue底层在显示dom元素时复用已存在的元素-->
+  <span v-if="isUserName">
+    <label for="userName">用户名称</label>
+    <input type="text" id="userName" placeholder="用户名称" key="userName">
+  </span>
+  <span v-else>
+    <label for="userEmail">用户邮箱</label>
+    <input type="text" id="userEmail" placeholder="用户邮箱" key="userEmail">
+  </span>
+  <button @click="isUserName = !isUserName">切换类型</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      isUserName: true
+    }
+  })
+</script>
+</body>
+</html>

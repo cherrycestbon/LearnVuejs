@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--input和数据进行了双向绑定:将message中信息绑定到input中作为它的value-->
+  <!--当改变dom中input中的数据时，data中的message的值也被改变了-->
+  <input type="text" v-model="message">
+  {{message}}
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    }
+  })
+</script>
+</body>
+</html>
