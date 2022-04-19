@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn2></cpn2>
+
+  <!--这里不能使用<cpn1></cpn1>,因为要么全局注册过，要么在Vue的components属性中注册过，否则不嫩在这里使用>-->
+  <!--使用组件标签时，现在Vue的components中找，然后在全局组件中找，找不到会报错-->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  //1.创建第一个组件构造器(子组件)
+  const cpnC1 = Vue.extend({
+    template: `
+      <div>
+        <h2>我是标题</h2>
+        <p>我是内容</p>
+      </div>
+    `
+  })
+  //2.创建第二个组件构造器(父组件)
+  const cpnC2 = Vue.extend({
+    template: `
+      <div>
+        <h2>我是标题2</h2>
+        <p>我是内容2</p>
+        <cpn1></cpn1>
+      </div>
+    `,
+    components: {
+      cpn1:cpnC1
+    }
+  })
+
+  //可以把Vue实例看作一个组顶层的组件：root
+  //vue组件是cpn2的父组件，cnp2是cnpC1的父组件
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    },
+    components: {
+      //cpn1: cpnC1,
+      cpn2: cpnC2
+    }
+  })
+</script>
+</body>
+</html>
