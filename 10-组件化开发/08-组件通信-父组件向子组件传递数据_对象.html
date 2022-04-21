@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--父组件中数据：moveis，通过v-bind绑定到子组件cpn的props中的属性cmovies和cmessage中，然后就可以在子组件中使用了-->
+<div id="app">
+  <!--v-bind:cmovies的简写-->
+  <cpn :cmovies="movies" :cmessage="message"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <ul>
+      <li v-for="item in cmovies">{{item}}</li>
+    </ul>
+    <h2>{{cmessage}}</h2>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  //父传子：通过props
+  const cpn = {
+    template: '#cpn',
+    //把cmovies,cmessage看作变量
+    props: {
+      //1.类型限制
+      //cmovies: Array,/*对传入的数据做验证：要求传入的数据必须是一个数组*/
+      //cmessage: String
+      //2.提供一些默认值
+      cmessage: {
+        type: String,/*类型必须是String*/
+        default: 'aaa',/*没有传值时,默认是aaa*/
+        required: true,/*在使用组件cpn时，属性cmessage是必传的*/
+      },
+      cmovies: {
+        /*类型是对象或数组时，默认值必须是一个函数*/
+        type: Array,
+        default(){
+          return []
+        },
+        /*default: []vue2.5.17以下正常，之后的版本会报错*/
+      }
+    },
+    data(){
+      return {
+
+      }
+    },
+    methods: {
+
+    }
+  }
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      movies: ['海王','海贼王','海尔兄弟']
+    },
+    components: {
+      /*注册局部组件：语法糖写法*/
+      /*对象字面量：属性增强写法*/
+      cpn
+    }
+  })
+</script>
+</body>
+</html>

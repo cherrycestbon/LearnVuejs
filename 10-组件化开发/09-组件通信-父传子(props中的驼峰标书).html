@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--必须让子组件在父组件中有使用-->
+  <!--v-bind不支持驼峰名称，如果把组件中cinfo替换为cInfo，cInfo将无法从父组件的info传到子组件的cInfo，会返回默认的{}，可以用c-info替代-->
+  <!--这里v-bind中childMyMessage必须写成chile-my-message-->
+  <cpn :cinfo="info" :child-my-message="message"></cpn>
+</div>
+<template id="cpn">
+  <!--一般情况下，在模板中定义标签时，都会先定义一个根标签-->
+  <div>
+    <h2>{{cinfo}}</h2>
+    <h3>{{childMyMessage}}</h3>
+  </div>
+
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template: '#cpn',
+    props: {
+      cinfo: {
+        type: Object,
+        /*default如果是对象的话，必须是函数，通过函数返回一个对象*/
+        default(){
+          return {}
+        }
+      },
+      childMyMessage: {
+        type: String,
+        default: ''
+      }
+    }
+  }
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      info: {
+        name: 'why',
+        age: 18,
+        height: 1.88
+      }
+    },
+    components: {
+      cpn
+    }
+  })
+</script>
+</body>
+</html>

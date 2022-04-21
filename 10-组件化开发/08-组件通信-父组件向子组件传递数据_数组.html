@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--父组件中数据：moveis，通过v-bind绑定到子组件cpn的props中的属性cmovies和cmessage中，然后就可以在子组件中使用了-->
+<div id="app">
+  <!--v-bind:cmovies的简写-->
+  <cpn :cmovies="movies" :cmessage="message"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <ul>
+      <li v-for="item in cmovies">{{item}}</li>
+    </ul>
+    <h2>{{cmessage}}</h2>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  //父传子：通过props
+  const cpn = {
+    template: '#cpn',
+    //把cmovies,cmessage看作变量
+    props: ['cmovies','cmessage'],
+    data(){
+      return {
+
+      }
+    },
+    methods: {
+
+    }
+  }
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      movies: ['海王','海贼王','海尔兄弟']
+    },
+    components: {
+      /*注册局部组件：语法糖写法*/
+      /*对象字面量：属性增强写法*/
+      cpn
+    }
+  })
+</script>
+</body>
+</html>
