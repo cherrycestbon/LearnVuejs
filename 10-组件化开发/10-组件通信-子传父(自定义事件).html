@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--父组件模板-->
+<div id="app">
+  <!--父组件监听子组件发出的事件-->
+  <!--这里自定义方法中，cpnClick省略掉参数，默认会把子组件中发射方法的参数传过来-->
+  <cpn @item-click="cpnClick"></cpn>
+</div>
+<!--子组件模板-->
+<template id="cpn">
+  <div>
+    <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+  </div>
+
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  //1.子组件
+  const cpn = {
+    template: '#cpn',
+    data() {
+      return {
+        categories: [
+          {'id':'aaa','name':'热门推荐'},
+          {'id':'bbb','name':'手机数码'},
+          {'id':'ccc','name':'加用家电'},
+          {'id':'ddd','name':'电脑办公'},
+        ]
+      }
+    },
+    methods: {
+      btnClick(item) {
+        console.log(item);
+        //把数据传给父组件：通过自定义事件
+        //itemClick是事件的名字(先不用驼峰),item是发射事件时传递的参数
+        //事件发出去之后，父组件需要监听这个事件
+        this.$emit('item-click',item)
+      }
+    }
+  }
+  //2.父组件
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    },
+    components: {
+      /*注册子组件*/
+      cpn
+    },
+    methods: {
+      cpnClick(item) {
+        console.log('cpnClick',item);
+      }
+    }
+  })
+</script>
+</body>
+</html>

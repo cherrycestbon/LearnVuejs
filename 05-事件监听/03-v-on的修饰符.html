@@ -8,7 +8,7 @@
 
 <div id="app">
   <!--1.stop修饰符的使用-->
-  <!--点击按钮1，事件冒泡，先出发btnClick,再触发divClick-->
+  <!--点击按钮1，事件冒泡，先触发btnClick,再触发divClick-->
   <div @click="divClick">
     <button @click="btnClick1">按钮1</button>
     <!--如果点击按钮2时，只执行btn的事件，把btn的冒泡阻止掉，可以在click后面加上.stop-->

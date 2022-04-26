@@ -7,7 +7,7 @@
 <body>
 <div id="app">
   <!--必须让子组件在父组件中有使用-->
-  <!--v-bind不支持驼峰名称，如果把组件中cinfo替换为cInfo，cInfo将无法从父组件的info传到子组件的cInfo，会返回默认的{}，可以用c-info替代-->
+  <!--v-bind不支持驼峰名称，如果把组件中cinfo替换为cInfo，cInfo将无法从父组件的info传到子组件的cInfo，会返回默认的{}，v:bind中就必须用c-info替代-->
   <!--这里v-bind中childMyMessage必须写成chile-my-message-->
   <cpn :cinfo="info" :child-my-message="message"></cpn>
 </div>
