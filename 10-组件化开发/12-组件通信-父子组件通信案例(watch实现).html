@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<!--需求：input中的数据改变时，使组件props中number1改变，同时使父组件中的num1的值也改变-->
+<!--会报错：因为props中的数据是通过父组件来改变的，但是这里通过在子组件中中的input的v-model改变props中number1,vue不推荐这样做-->
+<!--所以，如果想通过双向绑定，把值绑定到props中的数据中，不要直接绑定子组件的props中的数据。而是用data或computed-->
+<!--@input="changeInput1"：input值改变时，触发子组件changeInput1方法，该方法使子组件中的dnumber1改变，同时发射input1Changed方法，触发父组件changeNum1方法，该方法改变num1.-->
+<!--:number1="num1"：num1改变，会使传到子组件中，使子组件中props中的number1改变。-->
+<body>
+<!--将父组件中的num1和num2传递给子组件中的number1和number2-->
+<div id="app">
+  <!--这里有一个cpn标签，表示使用了一次cpn组件-->
+  <!--父组件数据传到子组件中，在一个标签中绑定多个属性，如:number1="num1" :number2="num2"-->
+  <!--子组件发射input1Changed和input2Changed，触发父组件的changeNum1和changeNum2-->
+  <cpn :number1="num1" :number2="num2" @input1changed="changenum1" @input2changed="changenum2"/>
+</div>
+<template id="cpn">
+  <div>
+    <h2>props:{{number1}}</h2>
+    <h2>data:{{dnumber1}}</h2>
+    <input type="text" v-model="dnumber1">
+    <h2>props:{{number2}}</h2>
+    <h2>data:{{dnumber2}}</h2>
+    <input type="text" v-model="dnumber2">
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      num1: 1,
+      num2: 0
+    },
+    methods: {
+      changenum1(value){
+        this.num1 = parseInt(value);
+      },
+      changenum2(value){
+        this.num2 = parseInt(value);
+      }
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        props: {
+          number1: Number,
+          number2: Number
+        },
+        /*组件中的data必须用函数,这个data中属性是给v-model用的，避免v-model直接绑定props中属性时报错*/
+        data(){
+          return {
+            /*根据props中的number1和number2初始化一下data中的dnumber1和dnumber2*/
+            dnumber1: this.number1,/*v-model可以使dnumber1的值随input的值而改变，但无法使父组件中num1的值改变*/
+            dnumber2: this.number2
+          }
+        },
+        watch: {
+          /*这里的dnumber1属性必须和data中的属性同名，表示监听该属性*/
+          /*这里一般可以有两个参数，第一个是newValue,第二个是oldValue，但一般用第一个比较多*/
+          dnumber1(newValue){
+            /*这里改变了dnumber2,可以被下面dunmber2方法监听到*/
+            this.dnumber2 = newValue * 100;
+            this.$emit('input1changed',newValue)
+          },
+          dnumber2(newValue){
+            this.dnumber1 = newValue / 100;
+            this.$emit('input2changed',newValue)
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
