@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--组件插槽的目的是让我们的组件具有更强的扩展性-->
+<!--
+1.插槽的基本使用<slot></slot>>
+2.插槽的默认值
+-->
+<div id="app">
+  <cpn><button>按钮1</button></cpn>
+  <cpn><span>空间span</span></cpn>
+  <cpn><i>斜体i</i></cpn>
+  <!--如果这里没有指定要在插槽中显示的内容，就会显示插槽默认的内容-->
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+</div>
+<template id="cpn">
+  <dic>
+    <h2>我是组件</h2>
+    <p>我是组件---</p>
+    <!--这里slot标签之间可以为空，也可以加默认的内容-->
+    <slot><button>按钮2</button></slot>
+  </dic>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    },
+    components:{
+      cpn:{
+        template:'#cpn'
+      }
+    }
+  })
+</script>
+</body>
+</html>

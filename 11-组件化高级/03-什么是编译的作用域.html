@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--
+  这里的isShow是使用了Vue实例中的isShow属性，值为true
+  vue把组件cpn当作一个普通的html标签，标签中使用的变量来源取决于这个标签在哪个实例下。
+  <cpn>标签在app实例下，所以使用app实例的isShow变量值。
+  -->
+  <cpn v-show="isShow"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>我是子组件</h2>
+    <p>我是内容</p>
+    <!--这个button标签在cpn实例下，所以isShow变量值来源与cpn实例中的isShow变量值，为false-->
+    <button v-show="isShow"></button>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      isShow:true
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        data(){
+          return {
+            isShow:false
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
