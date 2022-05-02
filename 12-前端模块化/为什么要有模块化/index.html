@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+  引入多个js，这种js的组织方式可能会引起全局变量冲突
+  这种方式对js文件的依赖顺序是强制性的
+  解决方式：匿名闭包,只解决了变量名冲突的问题，无法解决想要代码复用的问题。
+  终极解决方式：匿名闭包 + 模块化，把每个js文件定义为一个全局模块变量
+-->
+</body>
+<script src="main.js"></script>
+<script src="aaa.js"></script>
+<script src="bbb.js"></script>
+<script src="mmm.js"></script>
+</html>
