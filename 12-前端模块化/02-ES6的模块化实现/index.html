@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--script标签加上type="module"之后，就不会再有命名冲突的问题
+意味着aaa.js和bbb.js是作为单位模块来使用的
+单独的模块有单独的作用域
+-->
+<script src="aaa.js" type="module"></script>
+<script src="bbb.js" type="module"></script>
+<script src="mmm.js" type="module"></script>
+</body>
+</html>

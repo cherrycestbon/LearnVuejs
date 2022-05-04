@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--如果main和mathUtils中使用了CommonJS语句，浏览器不识别，所以不能用以下方式引入html文件。-->
+<!--<script src="./src/main.js"></script>-->
+<!--这里需要引用（webpack将使用CommonJS语法发文件打包之后生成的js文件）-->
+<script src="./dist/bundle.js"></script>
+</body>
+</html>
