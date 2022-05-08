@@ -73,12 +73,16 @@ module.exports = {
     ],
   },
   resolve:{
+    /*解决路径问题：*/
     /*别名*/
     /*在main.js中使用import Vue from 'vue'，默认使用vue/dis/vue.runtime.js*/
     /*配置了它之后，在main.js中使用import Vue from 'vue'，就会到这里看是否指定了文件*/
     alias: {
       /*vue/dist/vue.esm.js文件中有编译template的代码*/
-      'vue$': 'vue/dist/vue.esm.js'
-    }
+      'vue$': 'vue/dist/vue.esm.js',
+    },
+    /*解决扩展名：App.vue中导入Cpn.vue时，可省略.vue*/
+    /*在用import 组件名 from 'vue文件路径'时，若vue文件路径中省略.vue， 需要在此配置*/
+    extensions:['.vue','.js','.css']
   }
 }
