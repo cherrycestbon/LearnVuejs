@@ -37,3 +37,5 @@ const app = new Vue({
   }
 
 })
+
+document.writeln('<button>知否知否,应是绿肥红瘦。</button>')
