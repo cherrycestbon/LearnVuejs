@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  //什么时候使用箭头函数
+  //当我们把一个函数当作一个参数传到另一个函数中时，使用箭头函数是最多的。
+  setTimeout(function(){
+    console.log(this)//这里打印的是Window
+  },1000)
+  //setTimeout是一个函数，() => {}是另外一个函数
+  setTimeout(() => {
+    console.log(this)//这里打印的也是Window
+  },1000)
+
+  //问题：箭头函数中的this是如何查找的？
+  //答案：向外层作用域一层一层查找，直到有this
+  const obj = {
+    //在对象字面量中定义函数，一般是以这种形式
+    aaa() {
+      setTimeout(function(){
+        console.log(this)//这里打印的是Window
+      },1000)
+      setTimeout(() => {
+        console.log(this)//这里打印的也是obj对象
+      },1000)
+    }
+  }
+</script>
+</html>

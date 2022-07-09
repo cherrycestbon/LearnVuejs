@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  //会在内部判断，数组中的多个网络请求是否都完成，如果都完成，就会进入then函数
+  Promise.all([
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('回调一')
+      },1000)
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('回调二')
+      },3000)
+    })
+  ]).then(results => {
+    //results是一个数组，数组中包含着请求一的返回结果，请求二的返回结果。
+    //下标为0的，保存第一个请求的结果，下标为1的，保存第二个请求的结果。
+    console.log(results[0]);
+    console.log(results[1]);
+  })
+</script>
+</body>
+</html>

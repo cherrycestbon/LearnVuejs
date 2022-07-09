@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  //then函数中传入两个函数：一个是网络请求成功时的回调函数，一个是网络请求失败时的回调函数。
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Hello World')
+    },1000)
+  }).then(data => {
+    console.log(data)
+  },error => {
+    console.log(error)
+  })
+</script>
+</body>
+</html>

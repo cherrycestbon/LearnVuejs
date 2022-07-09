@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  //1.参数问题
+  //1.1.放入两个参数
+  const sum = (num1,num2) => {
+    return num1 + num2;
+  }
+  //1.2.放入一个参数
+  const power = (num) => {
+    //平方
+    return num * num;
+  }
+  //当放入一个参数时，小括号可以省去
+  const power_ = num => {
+    return num * num;
+  }
+  //2.返回值
+  //函数代码块中有多行代码时
+  const test = () => {
+
+    console.log('hello world');
+    console.log('hello vuejs');
+
+  }
+  //函数代码块中有一行代码
+  const mul = (num1,num2) => {
+    return num1 * num2;
+  }
+  //只要一行代码时可省去大括号，同时也省去return，会自动将这行代码的结果返回。
+  const mul_ = (num1,num2) => num1 * num2;
+</script>
+</html>
